@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/squid_game/static/css/main.ed6f916e.chunk.css",
+    "main.js": "/squid_game/static/js/main.860d21c1.chunk.js",
+    "main.js.map": "/squid_game/static/js/main.860d21c1.chunk.js.map",
+    "runtime-main.js": "/squid_game/static/js/runtime-main.08eb88f0.js",
+    "runtime-main.js.map": "/squid_game/static/js/runtime-main.08eb88f0.js.map",
+    "static/js/2.59638e8c.chunk.js": "/squid_game/static/js/2.59638e8c.chunk.js",
+    "static/js/2.59638e8c.chunk.js.map": "/squid_game/static/js/2.59638e8c.chunk.js.map",
+    "static/js/3.21aaf4ec.chunk.js": "/squid_game/static/js/3.21aaf4ec.chunk.js",
+    "static/js/3.21aaf4ec.chunk.js.map": "/squid_game/static/js/3.21aaf4ec.chunk.js.map",
+    "index.html": "/squid_game/index.html",
+    "static/css/main.ed6f916e.chunk.css.map": "/squid_game/static/css/main.ed6f916e.chunk.css.map",
+    "static/js/2.59638e8c.chunk.js.LICENSE.txt": "/squid_game/static/js/2.59638e8c.chunk.js.LICENSE.txt",
+    "static/media/art.c43ff476.jpg": "/squid_game/static/media/art.c43ff476.jpg",
+    "static/media/best.ae267b11.png": "/squid_game/static/media/best.ae267b11.png",
+    "static/media/cr.52574171.png": "/squid_game/static/media/cr.52574171.png",
+    "static/media/hoodie.a550aa81.png": "/squid_game/static/media/hoodie.a550aa81.png",
+    "static/media/imagee.cd51c9c5.png": "/squid_game/static/media/imagee.cd51c9c5.png",
+    "static/media/kyoo.bd09b6eb.png": "/squid_game/static/media/kyoo.bd09b6eb.png",
+    "static/media/lefti.f49c5932.png": "/squid_game/static/media/lefti.f49c5932.png",
+    "static/media/light.de1bdb54.png": "/squid_game/static/media/light.de1bdb54.png",
+    "static/media/logo.cc603157.png": "/squid_game/static/media/logo.cc603157.png",
+    "static/media/p067.fd23116e.png": "/squid_game/static/media/p067.fd23116e.png",
+    "static/media/p456.3f2b8b5a.png": "/squid_game/static/media/p456.3f2b8b5a.png",
+    "static/media/refresh.9bfd6652.png": "/squid_game/static/media/refresh.9bfd6652.png",
+    "static/media/sq.6302ffdd.png": "/squid_game/static/media/sq.6302ffdd.png",
+    "static/media/star.0110cf07.png": "/squid_game/static/media/star.0110cf07.png",
+    "static/media/symbolic.7b550d5d.png": "/squid_game/static/media/symbolic.7b550d5d.png",
+    "static/media/tees.30fcd3c8.png": "/squid_game/static/media/tees.30fcd3c8.png",
+    "static/media/truck.30fe1975.png": "/squid_game/static/media/truck.30fe1975.png",
+    "static/media/tshirt.30e33572.png": "/squid_game/static/media/tshirt.30e33572.png",
+    "static/media/ufo.7853c999.png": "/squid_game/static/media/ufo.7853c999.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.08eb88f0.js",
+    "static/js/2.59638e8c.chunk.js",
+    "static/css/main.ed6f916e.chunk.css",
+    "static/js/main.860d21c1.chunk.js"
+  ]
+}
