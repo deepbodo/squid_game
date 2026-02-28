@@ -1,26 +1,31 @@
 {
   "files": {
     "main.css": "/squid_game/static/css/main.ed6f916e.chunk.css",
-    "main.js": "/squid_game/static/js/main.86bf55fe.chunk.js",
-    "main.js.map": "/squid_game/static/js/main.86bf55fe.chunk.js.map",
-    "runtime-main.js": "/squid_game/static/js/runtime-main.08eb88f0.js",
-    "runtime-main.js.map": "/squid_game/static/js/runtime-main.08eb88f0.js.map",
-    "static/js/2.59638e8c.chunk.js": "/squid_game/static/js/2.59638e8c.chunk.js",
-    "static/js/2.59638e8c.chunk.js.map": "/squid_game/static/js/2.59638e8c.chunk.js.map",
-    "static/js/3.21aaf4ec.chunk.js": "/squid_game/static/js/3.21aaf4ec.chunk.js",
-    "static/js/3.21aaf4ec.chunk.js.map": "/squid_game/static/js/3.21aaf4ec.chunk.js.map",
+    "main.js": "/squid_game/static/js/main.e3378435.chunk.js",
+    "main.js.map": "/squid_game/static/js/main.e3378435.chunk.js.map",
+    "runtime-main.js": "/squid_game/static/js/runtime-main.53c08c3e.js",
+    "runtime-main.js.map": "/squid_game/static/js/runtime-main.53c08c3e.js.map",
+    "static/js/2.d030b326.chunk.js": "/squid_game/static/js/2.d030b326.chunk.js",
+    "static/js/2.d030b326.chunk.js.map": "/squid_game/static/js/2.d030b326.chunk.js.map",
+    "static/js/3.a79e9d0e.chunk.js": "/squid_game/static/js/3.a79e9d0e.chunk.js",
+    "static/js/3.a79e9d0e.chunk.js.map": "/squid_game/static/js/3.a79e9d0e.chunk.js.map",
     "index.html": "/squid_game/index.html",
     "static/css/main.ed6f916e.chunk.css.map": "/squid_game/static/css/main.ed6f916e.chunk.css.map",
-    "static/js/2.59638e8c.chunk.js.LICENSE.txt": "/squid_game/static/js/2.59638e8c.chunk.js.LICENSE.txt",
+    "static/js/2.d030b326.chunk.js.LICENSE.txt": "/squid_game/static/js/2.d030b326.chunk.js.LICENSE.txt",
     "static/media/art.c43ff476.jpg": "/squid_game/static/media/art.c43ff476.jpg",
     "static/media/best.ae267b11.png": "/squid_game/static/media/best.ae267b11.png",
     "static/media/cr.52574171.png": "/squid_game/static/media/cr.52574171.png",
+    "static/media/crt.499e0536.png": "/squid_game/static/media/crt.499e0536.png",
+    "static/media/front.6e4377e2.png": "/squid_game/static/media/front.6e4377e2.png",
+    "static/media/hood.3a708b79.png": "/squid_game/static/media/hood.3a708b79.png",
     "static/media/hoodie.a550aa81.png": "/squid_game/static/media/hoodie.a550aa81.png",
     "static/media/imagee.cd51c9c5.png": "/squid_game/static/media/imagee.cd51c9c5.png",
     "static/media/kyoo.bd09b6eb.png": "/squid_game/static/media/kyoo.bd09b6eb.png",
     "static/media/lefti.f49c5932.png": "/squid_game/static/media/lefti.f49c5932.png",
     "static/media/light.de1bdb54.png": "/squid_game/static/media/light.de1bdb54.png",
+    "static/media/loco.2affa89c.png": "/squid_game/static/media/loco.2affa89c.png",
     "static/media/logo.cc603157.png": "/squid_game/static/media/logo.cc603157.png",
+    "static/media/maski.546a983b.png": "/squid_game/static/media/maski.546a983b.png",
     "static/media/p067.fd23116e.png": "/squid_game/static/media/p067.fd23116e.png",
     "static/media/p456.3f2b8b5a.png": "/squid_game/static/media/p456.3f2b8b5a.png",
     "static/media/refresh.9bfd6652.png": "/squid_game/static/media/refresh.9bfd6652.png",
@@ -33,9 +38,9 @@
     "static/media/ufo.7853c999.png": "/squid_game/static/media/ufo.7853c999.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.08eb88f0.js",
-    "static/js/2.59638e8c.chunk.js",
+    "static/js/runtime-main.53c08c3e.js",
+    "static/js/2.d030b326.chunk.js",
     "static/css/main.ed6f916e.chunk.css",
-    "static/js/main.86bf55fe.chunk.js"
+    "static/js/main.e3378435.chunk.js"
   ]
 }
