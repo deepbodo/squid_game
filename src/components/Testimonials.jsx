@@ -45,7 +45,7 @@ const QuoteText = styled.p`
   margin-bottom: 25px;
 
   &::before {
-    content: """;
+    content: "\\201C";
     font-size: 50px;
     color: #ea4c89;
     line-height: 0;
@@ -54,7 +54,7 @@ const QuoteText = styled.p`
   }
 
   &::after {
-    content: """;
+    content: "\\201D";
     font-size: 50px;
     color: #ea4c89;
     line-height: 0;
@@ -94,53 +94,53 @@ const Dot = styled.button`
 `;
 
 const testimonials = [
-    {
-        text: "The hoodie quality is insane! Feels like I'm actually in the game. Best merch store I've found.",
-        author: "— Player 456",
-    },
-    {
-        text: "Shipping was super fast and the t-shirt design is spot on. My friends are jealous!",
-        author: "— Player 067",
-    },
-    {
-        text: "Bought the full collection — mask, hoodie, and tee. Everything arrived perfectly. 10/10!",
-        author: "— Player 218",
-    },
-    {
-        text: "The attention to detail on these products is amazing. You can tell they're made by real fans.",
-        author: "— Player 199",
-    },
+  {
+    text: "The hoodie quality is insane! Feels like I'm actually in the game. Best merch store I've found.",
+    author: "Player 456",
+  },
+  {
+    text: "Shipping was super fast and the t-shirt design is spot on. My friends are jealous!",
+    author: "Player 067",
+  },
+  {
+    text: "Bought the full collection - mask, hoodie, and tee. Everything arrived perfectly. 10/10!",
+    author: "Player 218",
+  },
+  {
+    text: "The attention to detail on these products is amazing. You can tell they're made by real fans.",
+    author: "Player 199",
+  },
 ];
 
 const Testimonials = () => {
-    const revealRef = useScrollReveal();
-    const [current, setCurrent] = useState(0);
+  const revealRef = useScrollReveal();
+  const [current, setCurrent] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrent((prev) => (prev + 1) % testimonials.length);
-        }, 5000);
-        return () => clearInterval(interval);
-    }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-    return (
-        <Container ref={revealRef} className="scroll-reveal">
-            <Title>⭐ What Players Say</Title>
-            <QuoteCard key={current}>
-                <QuoteText>{testimonials[current].text}</QuoteText>
-                <Author>{testimonials[current].author}</Author>
-            </QuoteCard>
-            <Dots>
-                {testimonials.map((_, i) => (
-                    <Dot
-                        key={i}
-                        active={i === current}
-                        onClick={() => setCurrent(i)}
-                    />
-                ))}
-            </Dots>
-        </Container>
-    );
+  return (
+    <Container ref={revealRef} className="scroll-reveal">
+      <Title>What Players Say</Title>
+      <QuoteCard key={current}>
+        <QuoteText>{testimonials[current].text}</QuoteText>
+        <Author>{testimonials[current].author}</Author>
+      </QuoteCard>
+      <Dots>
+        {testimonials.map((_, i) => (
+          <Dot
+            key={i}
+            active={i === current}
+            onClick={() => setCurrent(i)}
+          />
+        ))}
+      </Dots>
+    </Container>
+  );
 };
 
 export default Testimonials;
