@@ -7,6 +7,7 @@ import SliderItem2 from "./SliderItem2";
 import SliderItem3 from "./SliderItem3";
 import SliderItem4 from "./SliderItem4";
 import SliderItem5 from "./SliderItem5";
+import useScrollReveal from "../useScrollReveal";
 
 const Container = styled.div`
   height: auto;
@@ -19,6 +20,7 @@ const Header = styled.img`
     transform: scale(0.9);
   }
   margin-bottom: 30px;
+  transition: transform 0.4s ease;
 `;
 const Box = styled.div`
   width: 100%;
@@ -29,8 +31,10 @@ const Box = styled.div`
 `;
 
 const Best = () => {
+  const revealRef = useScrollReveal();
+
   return (
-    <Container>
+    <Container ref={revealRef} className="scroll-reveal">
       <Header src={Brest} />
       <Box>
         <SliderItem1 />

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Email from "./Email";
 import Art from "./image/art.jpg";
 import Symbol from "./image/symbolic.png";
+import useScrollReveal from "../useScrollReveal";
+
 const Container = styled.div`
   height: 1000px;
   margin-top: 200px;
@@ -28,6 +30,7 @@ const Box = styled.div`
     #5ffbf1
   );
   display: flex;
+  border-radius: 20px;
 `;
 const Left = styled.div`
   height: 100%;
@@ -37,6 +40,11 @@ const Image = styled.img`
   margin-left: 60px;
   margin-top: 40px;
   height: 90%;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 const Right = styled.div`
   width: 50%;
@@ -71,8 +79,10 @@ const Elu = styled.div`
 `;
 
 const Epic = () => {
+  const revealRef = useScrollReveal();
+
   return (
-    <Container>
+    <Container ref={revealRef} className="scroll-reveal">
       <Box>
         <Left>
           <Image src={Art} />

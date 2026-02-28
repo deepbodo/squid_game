@@ -6,6 +6,9 @@ import Epic from "./components/Epic";
 import Navbar from "./components/Navbar";
 import Section from "./components/Section";
 import Footer from "./components/Footer";
+import Countdown from "./components/Countdown";
+import Testimonials from "./components/Testimonials";
+import BackToTop from "./components/BackToTop";
 
 const Container = styled.div`
   height: auto;
@@ -16,6 +19,7 @@ const Container = styled.div`
   background: -moz-radial-gradient(bottom right, #0d1328, #647082);
   background: radial-gradient(to top left, #0d1328, #647082);
 `;
+
 function App() {
   return (
     <>
@@ -23,9 +27,12 @@ function App() {
         <Navbar />
         <BelowNav />
         <Section />
+        <Testimonials />
         <Best />
+        <Countdown />
         <Epic />
         <Footer />
+        <BackToTop />
       </Container>
     </>
   );

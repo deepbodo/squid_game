@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import Card2 from "./Card2";
 import Card3 from "./Card3";
+import useScrollReveal from "../useScrollReveal";
 
 const Container = styled.div`
   height: 100%;
@@ -25,7 +26,6 @@ const Features = styled.div`
 `;
 const Card1 = styled.div`
   background-color: palevioletred;
-  margin-: 80px;
   width: 500px;
   border-radius: 30px;
   height: 700px;
@@ -34,8 +34,10 @@ const Card1 = styled.div`
 
 const Title = styled.h1``;
 const Section = () => {
+  const revealRef = useScrollReveal();
+
   return (
-    <Container>
+    <Container ref={revealRef} className="scroll-reveal">
       <Box>
         <Features>
           <Card />

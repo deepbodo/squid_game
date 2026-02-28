@@ -4,9 +4,13 @@ import lofti from "./image/lefti.png";
 import plr from "./image/imagee.png";
 import kyoo from "./image/kyoo.png";
 import sq from "./image/sq.png";
+import FloatingShapes from "./FloatingShapes";
+import useScrollReveal from "../useScrollReveal";
+
 const Container = styled.div`
   display: flex;
   height: 100vh;
+  position: relative;
 `;
 const Left = styled.div`
   width: 20%;
@@ -22,10 +26,11 @@ const Center = styled.div`
   width: 60%;
   margin-top: 100px;
   height: auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
 `;
 const Cimage = styled.img`
   align-items: center;
@@ -56,18 +61,23 @@ const Spb = styled.button`
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: color 100ms;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   vertical-align: baseline;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  box-shadow: 0 4px 15px rgba(234, 76, 137, 0.4);
+
   &:hover {
-    transform: scale(1.4);
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 8px 30px rgba(234, 76, 137, 0.6);
   }
 `;
 
 const Right = styled.div`
   width: 20%;
+  position: relative;
+  z-index: 1;
 `;
 const Righti = styled.h2`
   margin-top: 50px;
@@ -77,7 +87,6 @@ const Righti = styled.h2`
   font-size: 25px;
   margin-right: 20px;
   word-spacing: 2px;
-
   font-weight: normal;
   text-decoration: none;
   font-style: normal;
@@ -91,8 +100,11 @@ const Reck = styled.img`
 `;
 
 const BelowNav = () => {
+  const revealRef = useScrollReveal();
+
   return (
-    <Container>
+    <Container ref={revealRef} className="scroll-reveal">
+      <FloatingShapes />
       <Left>
         <Lefti src={lofti} />
         <Leck src={kyoo} />
