@@ -18,6 +18,7 @@ import BlogPage from "./components/pages/BlogPage";
 import AboutPage from "./components/pages/AboutPage";
 import ContactPage from "./components/pages/ContactPage";
 import AdminDashboard from "./components/pages/AdminDashboard";
+import ChatAssistant from "./components/ChatAssistant";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -50,6 +51,7 @@ function App() {
               <Route path="/contact" component={ContactPage} />
               <Route path="/admin" component={AdminDashboard} />
             </Switch>
+            <ChatAssistant />
             <BackToTop />
           </Container>
         </Router>
