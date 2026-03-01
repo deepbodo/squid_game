@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import logo from "./image/logo.png";
 import { Link, useLocation } from "react-router-dom";
@@ -131,6 +131,7 @@ const AuthBtn = styled(Link)`
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
+  white-space: nowrap;
 
   &:hover {
     background: #ea4c89;
@@ -138,17 +139,14 @@ const AuthBtn = styled(Link)`
   }
 `;
 
-const UserBadge = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
-  font-size: 14px;
+/* User Avatar Dropdown */
+const AvatarWrapper = styled.div`
+  position: relative;
 `;
 
 const UserAvatar = styled.div`
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ea4c89, #d16ba5);
   display: flex;
@@ -156,37 +154,123 @@ const UserAvatar = styled.div`
   justify-content: center;
   font-weight: bold;
   font-size: 16px;
-`;
-
-const LogoutBtn = styled.button`
-  padding: 6px 16px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
 
   &:hover {
-    border-color: #ea4c89;
-    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(234, 76, 137, 0.5);
   }
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 200px;
+  background: rgba(13, 19, 40, 0.97);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(219, 112, 147, 0.25);
+  border-radius: 14px;
+  padding: 10px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  opacity: ${(p) => (p.open ? 1 : 0)};
+  visibility: ${(p) => (p.open ? "visible" : "hidden")};
+  transform: translateY(${(p) => (p.open ? "0" : "-10px")});
+  transition: all 0.25s ease;
+  z-index: 200;
+`;
+
+const DropdownItem = styled(Link)`
+  display: block;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(234, 76, 137, 0.1);
+    color: #ea4c89;
+  }
+`;
+
+const DropdownButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(234, 76, 137, 0.1);
+    color: #ea4c89;
+  }
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background: rgba(219, 112, 147, 0.15);
+  margin: 6px 0;
+`;
+
+const UserEmail = styled.div`
+  padding: 8px 20px 10px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  border-bottom: 1px solid rgba(219, 112, 147, 0.15);
+  margin-bottom: 4px;
+  word-break: break-all;
+`;
+
+const AdminBadge = styled.span`
+  background: rgba(234, 76, 137, 0.2);
+  color: #ea4c89;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+  font-weight: bold;
+  letter-spacing: 1px;
 `;
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
-  const { currentUser, logout } = useAuth();
+  const { currentUser, isAdmin, logout } = useAuth();
   const { cartCount } = useCart();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setDropdownOpen(false);
+  }, [location]);
 
   const isActive = (path) => location.pathname === path;
 
@@ -195,31 +279,21 @@ const Navbar = () => {
       <Wrapper>
         <Menu>
           <NavItem>
-            <NavLink to="/" active={isActive("/") ? 1 : 0}>
-              Home
-            </NavLink>
+            <NavLink to="/" active={isActive("/") ? 1 : 0}>Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/store" active={isActive("/store") ? 1 : 0}>
-              Store
-            </NavLink>
+            <NavLink to="/store" active={isActive("/store") ? 1 : 0}>Store</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/blog" active={isActive("/blog") ? 1 : 0}>
-              Blog
-            </NavLink>
+            <NavLink to="/blog" active={isActive("/blog") ? 1 : 0}>Blog</NavLink>
           </NavItem>
-
           <NavItem>
             <LogoLink to="/">
               <Logo src={logo} />
             </LogoLink>
           </NavItem>
-
           <NavItem>
-            <NavLink to="/about" active={isActive("/about") ? 1 : 0}>
-              About Us
-            </NavLink>
+            <NavLink to="/about" active={isActive("/about") ? 1 : 0}>About Us</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/cart" active={isActive("/cart") ? 1 : 0}>
@@ -228,26 +302,35 @@ const Navbar = () => {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/contact" active={isActive("/contact") ? 1 : 0}>
-              Contact
-            </NavLink>
+            <NavLink to="/contact" active={isActive("/contact") ? 1 : 0}>Contact</NavLink>
           </NavItem>
         </Menu>
 
         <RightSection>
           {currentUser ? (
-            <UserBadge>
-              <UserAvatar>
+            <AvatarWrapper ref={dropdownRef}>
+              <UserAvatar onClick={() => setDropdownOpen(!dropdownOpen)}>
                 {currentUser.email.charAt(0).toUpperCase()}
               </UserAvatar>
-              <LogoutBtn onClick={() => logout()}>Logout</LogoutBtn>
-            </UserBadge>
+              <Dropdown open={dropdownOpen}>
+                <UserEmail>
+                  {currentUser.email}
+                  {isAdmin && <AdminBadge>ADMIN</AdminBadge>}
+                </UserEmail>
+                <DropdownItem to="/orders">My Orders</DropdownItem>
+                {isAdmin && (
+                  <DropdownItem to="/admin">Admin Dashboard</DropdownItem>
+                )}
+                <Divider />
+                <DropdownButton onClick={() => { logout(); setDropdownOpen(false); }}>
+                  Logout
+                </DropdownButton>
+              </Dropdown>
+            </AvatarWrapper>
           ) : (
             <>
               <AuthBtn to="/login">Login</AuthBtn>
-              <AuthBtn to="/signup" primary={1}>
-                Sign Up
-              </AuthBtn>
+              <AuthBtn to="/signup" primary={1}>Sign Up</AuthBtn>
             </>
           )}
         </RightSection>

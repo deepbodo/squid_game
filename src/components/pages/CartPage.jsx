@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useCart } from "../../CartContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -195,68 +195,69 @@ const ShopLink = styled(Link)`
 `;
 
 const CartPage = () => {
-    const { cartItems, updateQuantity, removeFromCart, cartTotal, cartCount } =
-        useCart();
+  const { cartItems, updateQuantity, removeFromCart, cartTotal, cartCount } =
+    useCart();
+  const history = useHistory();
 
-    if (cartItems.length === 0) {
-        return (
-            <Container>
-                <Title>Your Cart</Title>
-                <EmptyCart>
-                    <EmptyText>Your cart is empty. Start shopping!</EmptyText>
-                    <ShopLink to="/store">Browse Store</ShopLink>
-                </EmptyCart>
-            </Container>
-        );
-    }
-
+  if (cartItems.length === 0) {
     return (
-        <Container>
-            <Title>Your Cart</Title>
-            <Subtitle>{cartCount} item{cartCount !== 1 ? "s" : ""} in your cart</Subtitle>
-
-            {cartItems.map((item) => (
-                <CartItem key={item.id}>
-                    <ItemImage src={item.image} alt={item.name} />
-                    <ItemInfo>
-                        <ItemName>{item.name}</ItemName>
-                        <ItemPrice>${(item.price * item.quantity).toFixed(2)}</ItemPrice>
-                    </ItemInfo>
-                    <QuantityControls>
-                        <QtyBtn onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                            -
-                        </QtyBtn>
-                        <Qty>{item.quantity}</Qty>
-                        <QtyBtn onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                            +
-                        </QtyBtn>
-                    </QuantityControls>
-                    <RemoveBtn onClick={() => removeFromCart(item.id)}>✕</RemoveBtn>
-                </CartItem>
-            ))}
-
-            <Summary>
-                <SummaryRow>
-                    <span>Subtotal</span>
-                    <span>${cartTotal.toFixed(2)}</span>
-                </SummaryRow>
-                <SummaryRow>
-                    <span>Shipping</span>
-                    <span>{cartTotal >= 50 ? "Free" : "$5.99"}</span>
-                </SummaryRow>
-                <TotalRow>
-                    <span>Total</span>
-                    <TotalPrice>
-                        ${(cartTotal >= 50 ? cartTotal : cartTotal + 5.99).toFixed(2)}
-                    </TotalPrice>
-                </TotalRow>
-            </Summary>
-
-            <CheckoutBtn onClick={() => alert("Checkout coming soon! Stay tuned.")}>
-                Proceed to Checkout
-            </CheckoutBtn>
-        </Container>
+      <Container>
+        <Title>Your Cart</Title>
+        <EmptyCart>
+          <EmptyText>Your cart is empty. Start shopping!</EmptyText>
+          <ShopLink to="/store">Browse Store</ShopLink>
+        </EmptyCart>
+      </Container>
     );
+  }
+
+  return (
+    <Container>
+      <Title>Your Cart</Title>
+      <Subtitle>{cartCount} item{cartCount !== 1 ? "s" : ""} in your cart</Subtitle>
+
+      {cartItems.map((item) => (
+        <CartItem key={item.id}>
+          <ItemImage src={item.image} alt={item.name} />
+          <ItemInfo>
+            <ItemName>{item.name}</ItemName>
+            <ItemPrice>${(item.price * item.quantity).toFixed(2)}</ItemPrice>
+          </ItemInfo>
+          <QuantityControls>
+            <QtyBtn onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+              -
+            </QtyBtn>
+            <Qty>{item.quantity}</Qty>
+            <QtyBtn onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+              +
+            </QtyBtn>
+          </QuantityControls>
+          <RemoveBtn onClick={() => removeFromCart(item.id)}>✕</RemoveBtn>
+        </CartItem>
+      ))}
+
+      <Summary>
+        <SummaryRow>
+          <span>Subtotal</span>
+          <span>${cartTotal.toFixed(2)}</span>
+        </SummaryRow>
+        <SummaryRow>
+          <span>Shipping</span>
+          <span>{cartTotal >= 50 ? "Free" : "$5.99"}</span>
+        </SummaryRow>
+        <TotalRow>
+          <span>Total</span>
+          <TotalPrice>
+            ${(cartTotal >= 50 ? cartTotal : cartTotal + 5.99).toFixed(2)}
+          </TotalPrice>
+        </TotalRow>
+      </Summary>
+
+      <CheckoutBtn onClick={() => history.push("/checkout")}>
+        Proceed to Checkout
+      </CheckoutBtn>
+    </Container>
+  );
 };
 
 export default CartPage;

@@ -62,14 +62,8 @@ const Input = styled.input`
   outline: none;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
-
-  &:focus {
-    border-color: #ea4c89;
-  }
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.3);
-  }
+  &:focus { border-color: #ea4c89; }
+  &::placeholder { color: rgba(255, 255, 255, 0.3); }
 `;
 
 const SubmitBtn = styled.button`
@@ -85,17 +79,8 @@ const SubmitBtn = styled.button`
   transition: all 0.3s ease;
   margin-top: 10px;
   letter-spacing: 1px;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(234, 76, 137, 0.5);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
+  &:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(234, 76, 137, 0.5); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 `;
 
 const ErrorMsg = styled.div`
@@ -108,94 +93,106 @@ const ErrorMsg = styled.div`
   margin-bottom: 20px;
 `;
 
+const WarningMsg = styled.div`
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  color: #ffc107;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+const ResendLink = styled.button`
+  background: none;
+  border: none;
+  color: #ea4c89;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  padding: 0;
+`;
+
 const BottomText = styled.p`
   color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
   text-align: center;
   margin-top: 25px;
-
-  a {
-    color: #ea4c89;
-    text-decoration: none;
-    font-weight: bold;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  a { color: #ea4c89; text-decoration: none; font-weight: bold; &:hover { text-decoration: underline; } }
 `;
 
 const LoginPage = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
-    const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showVerifyWarning, setShowVerifyWarning] = useState(false);
+  const { login, resendVerification } = useAuth();
+  const history = useHistory();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
-        setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setShowVerifyWarning(false);
+    setLoading(true);
+    try {
+      const cred = await login(email, password);
+      if (!cred.user.emailVerified) {
+        setShowVerifyWarning(true);
+      }
+      history.push("/");
+    } catch (err) {
+      setError(
+        err.code === "auth/user-not-found"
+          ? "No account found with this email."
+          : err.code === "auth/wrong-password"
+            ? "Incorrect password."
+            : "Failed to sign in. Please try again."
+      );
+    }
+    setLoading(false);
+  };
 
-        try {
-            await login(email, password);
-            history.push("/");
-        } catch (err) {
-            setError(
-                err.code === "auth/user-not-found"
-                    ? "No account found with this email."
-                    : err.code === "auth/wrong-password"
-                        ? "Incorrect password."
-                        : "Failed to sign in. Please try again."
-            );
-        }
+  const handleResend = async () => {
+    try {
+      await resendVerification();
+      alert("Verification email sent! Check your inbox.");
+    } catch {
+      alert("Could not send verification email. Try again later.");
+    }
+  };
 
-        setLoading(false);
-    };
-
-    return (
-        <Container>
-            <FormCard>
-                <Title>Welcome Back</Title>
-                <Subtitle>Sign in to your Squid Game Store account</Subtitle>
-
-                {error && <ErrorMsg>{error}</ErrorMsg>}
-
-                <form onSubmit={handleSubmit}>
-                    <InputGroup>
-                        <Label>Email</Label>
-                        <Input
-                            type="email"
-                            placeholder="your@email.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </InputGroup>
-
-                    <InputGroup>
-                        <Label>Password</Label>
-                        <Input
-                            type="password"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </InputGroup>
-
-                    <SubmitBtn type="submit" disabled={loading}>
-                        {loading ? "Signing in..." : "Sign In"}
-                    </SubmitBtn>
-                </form>
-
-                <BottomText>
-                    Don't have an account? <Link to="/signup">Sign Up</Link>
-                </BottomText>
-            </FormCard>
-        </Container>
-    );
+  return (
+    <Container>
+      <FormCard>
+        <Title>Welcome Back</Title>
+        <Subtitle>Sign in to your Squid Game Store account</Subtitle>
+        {showVerifyWarning && (
+          <WarningMsg>
+            Your email is not verified. <ResendLink onClick={handleResend}>Resend verification</ResendLink>
+          </WarningMsg>
+        )}
+        {error && <ErrorMsg>{error}</ErrorMsg>}
+        <form onSubmit={handleSubmit}>
+          <InputGroup>
+            <Label>Email</Label>
+            <Input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </InputGroup>
+          <InputGroup>
+            <Label>Password</Label>
+            <Input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </InputGroup>
+          <SubmitBtn type="submit" disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
+          </SubmitBtn>
+        </form>
+        <BottomText>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </BottomText>
+      </FormCard>
+    </Container>
+  );
 };
 
 export default LoginPage;
