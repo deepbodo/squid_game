@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import lofti from "./image/lefti.png";
 import plr from "./image/imagee.png";
 import kyoo from "./image/kyoo.png";
@@ -111,7 +112,7 @@ const BelowNav = () => {
       </Left>
       <Center>
         <Cimage src={sq}></Cimage>
-        <Spb>Shop Now</Spb>
+        <Spb as={Link} to="/store" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Shop Now</Spb>
       </Center>
       <Right>
         <Righti>All the Squid Game merchandise available here.</Righti>

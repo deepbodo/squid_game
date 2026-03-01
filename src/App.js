@@ -20,13 +20,19 @@ import ContactPage from "./components/pages/ContactPage";
 import AdminDashboard from "./components/pages/AdminDashboard";
 import ChatAssistant from "./components/ChatAssistant";
 
-const Container = styled.div`
+const PageWrapper = styled.div`
   min-height: 100vh;
-  overflow-x: hidden;
   background: #0d1328;
   background: -webkit-radial-gradient(bottom right, #0d1328, #647082);
   background: -moz-radial-gradient(bottom right, #0d1328, #647082);
   background: radial-gradient(to top left, #0d1328, #647082);
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentContainer = styled.div`
+  flex: 1;
+  overflow-x: hidden;
 `;
 
 function App() {
@@ -35,25 +41,27 @@ function App() {
       <CartProvider>
         <Router>
           <ScrollToTop />
-          <Container>
+          <PageWrapper>
             <Navbar />
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/store" component={StorePage} />
-              <Route path="/product/:id" component={ProductDetail} />
-              <Route path="/cart" component={CartPage} />
-              <Route path="/checkout" component={CheckoutPage} />
-              <Route path="/orders" component={OrdersPage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/blog" component={BlogPage} />
-              <Route path="/about" component={AboutPage} />
-              <Route path="/contact" component={ContactPage} />
-              <Route path="/admin" component={AdminDashboard} />
-            </Switch>
+            <ContentContainer>
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route exact path="/store" component={StorePage} />
+                <Route path="/product/:id" component={ProductDetail} />
+                <Route path="/cart" component={CartPage} />
+                <Route path="/checkout" component={CheckoutPage} />
+                <Route path="/orders" component={OrdersPage} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/signup" component={SignupPage} />
+                <Route path="/blog" component={BlogPage} />
+                <Route path="/about" component={AboutPage} />
+                <Route path="/contact" component={ContactPage} />
+                <Route path="/admin" component={AdminDashboard} />
+              </Switch>
+            </ContentContainer>
             <ChatAssistant />
             <BackToTop />
-          </Container>
+          </PageWrapper>
         </Router>
       </CartProvider>
     </AuthProvider>

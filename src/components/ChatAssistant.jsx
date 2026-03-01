@@ -106,53 +106,66 @@ const CloseBtn = styled.button`
 const IframeWrapper = styled.div`
   flex: 1;
   width: 100%;
-  background: white;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 0 0 18px 18px;
 `;
 
 const StyledIframe = styled.iframe`
   width: 100%;
   height: 100%;
   border: none;
+  background: transparent;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const ChatAssistant = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const { currentUser } = useAuth();
-    const [userName, setUserName] = useState("Player 456");
+  const [isOpen, setIsOpen] = useState(false);
+  const { currentUser } = useAuth();
+  const [userName, setUserName] = useState("Player 456");
+  const [uid, setUid] = useState("anonymous");
 
-    useEffect(() => {
-        if (currentUser) {
-            // Try to get name or email prefix
-            const name = currentUser.displayName || currentUser.email.split("@")[0];
-            setUserName(name);
-        }
-    }, [currentUser]);
+  useEffect(() => {
+    if (currentUser) {
+      const name = currentUser.displayName || currentUser.email.split("@")[0];
+      setUserName(name);
+      setUid(currentUser.uid);
+    } else {
+      setUserName("Player 456");
+      setUid("anonymous");
+    }
+  }, [currentUser]);
 
-    // HF Space URL - update this to YOUR space URL
-    const HF_SPACE_URL = "https://diki2001-squidchat.hf.space";
+  // HF Space URL with dynamic query parameters
+  const HF_SPACE_URL = `https://diki2001-squidchat.hf.space?uid=${encodeURIComponent(uid)}&name=${encodeURIComponent(userName)}`;
 
-    return (
-        <ChatWrapper>
-            <ChatWindow isOpen={isOpen}>
-                <ChatHeader>
-                    <span>YOUNG-HEE ASSISTANT</span>
-                    <CloseBtn onClick={() => setIsOpen(false)}>×</CloseBtn>
-                </ChatHeader>
-                <IframeWrapper>
-                    {isOpen && (
-                        <StyledIframe
-                            src={HF_SPACE_URL}
-                            title="Squid Game Chatbot"
-                            allow="microphone"
-                        />
-                    )}
-                </IframeWrapper>
-            </ChatWindow>
-            <ChatBubble onClick={() => setIsOpen(!isOpen)} title="Chat with Young-hee">
-                <img src={maski} alt="Assistant" />
-            </ChatBubble>
-        </ChatWrapper>
-    );
+  return (
+    <ChatWrapper>
+      <ChatWindow isOpen={isOpen}>
+        <ChatHeader>
+          <span>YOUNG-HEE ASSISTANT</span>
+          <CloseBtn onClick={() => setIsOpen(false)}>×</CloseBtn>
+        </ChatHeader>
+        <IframeWrapper>
+          {isOpen && (
+            <StyledIframe
+              src={HF_SPACE_URL}
+              title="Squid Game Chatbot"
+              allow="microphone"
+            />
+          )}
+        </IframeWrapper>
+      </ChatWindow>
+      <ChatBubble onClick={() => setIsOpen(!isOpen)} title="Chat with Young-hee">
+        <img src={maski} alt="Assistant" />
+      </ChatBubble>
+    </ChatWrapper>
+  );
 };
 
 export default ChatAssistant;
