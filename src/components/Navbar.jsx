@@ -23,16 +23,19 @@ const Wrapper = styled.div`
   display: flex;
   background: transparent;
   align-items: center;
+  justify-content: center;
   padding: 0 20px;
+  position: relative;
 `;
 
 const Menu = styled.ul`
   display: flex;
-  width: 100%;
   align-items: center;
-  padding-left: 5%;
+  justify-content: center;
   list-style: none;
   margin: 0;
+  padding: 0;
+  flex: 1;
 `;
 
 const NavItem = styled.li`
@@ -92,8 +95,11 @@ const LogoLink = styled(Link)`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
-  gap: 5px;
+  gap: 8px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
 const CartBadge = styled.span`
