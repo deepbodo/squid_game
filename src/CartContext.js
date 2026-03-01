@@ -7,7 +7,6 @@ import {
     addDoc,
     query,
     where,
-    orderBy,
     getDocs,
     serverTimestamp,
 } from "firebase/firestore";
@@ -174,11 +173,17 @@ export const CartProvider = ({ children }) => {
         try {
             const q = query(
                 collection(db, "orders"),
-                where("userId", "==", currentUser.uid),
-                orderBy("createdAt", "desc")
+                where("userId", "==", currentUser.uid)
             );
             const snap = await getDocs(q);
-            return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+            const orders = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+            // Sort client-side (avoids needing a Firestore composite index)
+            orders.sort((a, b) => {
+                const ta = a.createdAt?.toDate?.() || new Date(0);
+                const tb = b.createdAt?.toDate?.() || new Date(0);
+                return tb - ta;
+            });
+            return orders;
         } catch (err) {
             console.error("Error fetching orders:", err);
             return [];
