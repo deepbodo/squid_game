@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/squid_game/static/css/main.ed6f916e.chunk.css",
-    "main.js": "/squid_game/static/js/main.b3892030.chunk.js",
-    "main.js.map": "/squid_game/static/js/main.b3892030.chunk.js.map",
+    "main.js": "/squid_game/static/js/main.ce23718b.chunk.js",
+    "main.js.map": "/squid_game/static/js/main.ce23718b.chunk.js.map",
     "runtime-main.js": "/squid_game/static/js/runtime-main.53c08c3e.js",
     "runtime-main.js.map": "/squid_game/static/js/runtime-main.53c08c3e.js.map",
     "static/js/2.f89be1e3.chunk.js": "/squid_game/static/js/2.f89be1e3.chunk.js",
@@ -41,6 +41,6 @@
     "static/js/runtime-main.53c08c3e.js",
     "static/js/2.f89be1e3.chunk.js",
     "static/css/main.ed6f916e.chunk.css",
-    "static/js/main.b3892030.chunk.js"
+    "static/js/main.ce23718b.chunk.js"
   ]
 }
