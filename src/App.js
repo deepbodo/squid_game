@@ -5,6 +5,7 @@ import { AuthProvider } from "./AuthContext";
 import { CartProvider } from "./CartContext";
 import Navbar from "./components/Navbar";
 import BackToTop from "./components/BackToTop";
+import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./components/pages/HomePage";
 import StorePage from "./components/pages/StorePage";
 import ProductDetail from "./components/pages/ProductDetail";
@@ -16,7 +17,6 @@ import AboutPage from "./components/pages/AboutPage";
 import ContactPage from "./components/pages/ContactPage";
 
 const Container = styled.div`
-  height: auto;
   min-height: 100vh;
   overflow-x: hidden;
   background: #0d1328;
@@ -30,6 +30,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
+          <ScrollToTop />
           <Container>
             <Navbar />
             <Switch>
