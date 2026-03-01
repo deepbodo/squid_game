@@ -176,6 +176,7 @@ export const CartProvider = ({ children }) => {
                 where("userId", "==", currentUser.uid)
             );
             const snap = await getDocs(q);
+            console.log("DEBUG: Fetching orders for user (V2: client-side sort)", currentUser.uid);
             const orders = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
             // Sort client-side (avoids needing a Firestore composite index)
             orders.sort((a, b) => {
